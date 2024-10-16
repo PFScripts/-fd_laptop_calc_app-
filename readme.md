@@ -23,3 +23,7 @@ The Calculator App is a user-friendly calculator designed to work seamlessly wit
 ensure fd_laptop
 ensure (your app name)
 ```
+
+
+## **Credits**
+Huge Thanks to [Felis Development](https://discord.gg/THMHbnvRrv), for creating this amazing script, more to come about it

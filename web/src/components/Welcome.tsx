@@ -1,39 +1,37 @@
 import React, { useState } from "react";
-import { DEFAULT_THEME, Divider, Paper, Text, Button, Group, Stack, TextInput } from "@mantine/core";
+import {
+    DEFAULT_THEME,
+    Divider,
+    Paper,
+    Text,
+    Button,
+    Group,
+    Stack,
+    TextInput,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { useNuiEvent } from "../hooks/useNuiEvent";
 
 const Welcome: React.FC = () => {
     const theme = DEFAULT_THEME;
 
-    const { appReady, sendNotification } = window as any;
-
+    const { appReady } = window as any;
 
     if (appReady) {
         appReady();
     }
 
-    useNuiEvent<any>("testingMessage", (data: any) => {
-        console.log("Received testingMessage");
-        console.log(JSON.stringify(data, null, 2));
-    });
-
     const [input, setInput] = useState<string>("");
     const [result, setResult] = useState<string>("");
-
 
     const isSmallScreen = useMediaQuery("(max-width: 768px)");
     const isLargeScreen = useMediaQuery("(min-width: 1200px)");
 
-
     const handleClick = (value: string) => {
         if (result) {
-
             setResult("");
         }
         setInput((prevInput) => prevInput + value);
     };
-
 
     const calculate = () => {
         try {
@@ -41,17 +39,21 @@ const Welcome: React.FC = () => {
             setResult(evalResult);
             setInput("");
         } catch (error) {
-            setResult("Error");
+            setResult("ERRO!");
             setInput("");
         }
     };
-
 
     const clear = () => {
         setInput("");
         setResult("");
     };
 
+    const deleteLastChar = () => {
+        if (input.length > 0) {
+            setInput(input.slice(0, -1));
+        }
+    };
 
     const calculatorStyles = isSmallScreen
         ? {
@@ -91,7 +93,6 @@ const Welcome: React.FC = () => {
         : isLargeScreen
             ? { width: 90, height: 70, fontSize: 28 }
             : { width: 90, height: 70, fontSize: 22 };
-
 
     const operatorButtonStyle = {
         color: theme.colors.orange[6],
@@ -198,19 +199,31 @@ const Welcome: React.FC = () => {
                     </Group>
                 </Stack>
 
-                {/* Clear Button */}
-                <Button
-                    color="red"
-                    onClick={clear}
-                    style={{
-                        width: "100%",
-                        height: buttonSize.height,
-                        fontSize: buttonSize.fontSize,
-                        marginTop: 12,
-                    }}
-                >
-                    Clear
-                </Button>
+                {/* Clear and Delete Buttons */}
+                <Group position="center" grow style={{ marginTop: 12 }}>
+                    <Button
+                        color="red"
+                        onClick={clear}
+                        style={{
+                            width: "50%",
+                            height: buttonSize.height,
+                            fontSize: buttonSize.fontSize,
+                        }}
+                    >
+                        Clear
+                    </Button>
+                    <Button
+                        color="orange"
+                        onClick={deleteLastChar}
+                        style={{
+                            width: "50%",
+                            height: buttonSize.height,
+                            fontSize: buttonSize.fontSize,
+                        }}
+                    >
+                        Del
+                    </Button>
+                </Group>
 
                 {/* Divider */}
                 <Divider my="sm" />

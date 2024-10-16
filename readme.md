@@ -7,6 +7,9 @@
 ## Overview
 
 The Calculator App is a user-friendly calculator designed to work seamlessly with FiveM. It provides basic arithmetic functionalities with an intuitive interface, adaptable to various screen sizes.
+![image](https://github.com/user-attachments/assets/9570820a-94d5-40bb-9edd-bffc36c96c09)
+![image](https://github.com/user-attachments/assets/fd57ade8-26d5-420e-9db5-af109d180158)
+
 
 ## **Requirements**
 ### - **[fd_laptop](https://github.com/FelisDevelopment/fd_laptop)**
